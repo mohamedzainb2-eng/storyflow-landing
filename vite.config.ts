@@ -5,8 +5,8 @@ const repoName = "storyflow-landing";
 
 export default defineConfig({
   plugins: [react()],
-  base: `/${repoName}/`,
+  base: `/${repoName}/`,   
   build: {
-    outDir: "docs",   
+    outDir: "docs",       
   },
 });
