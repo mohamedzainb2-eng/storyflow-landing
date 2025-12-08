@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useLanguage } from "../core/i18n/LanguageContext";
 import { CinematicTitle } from "./CinematicTitle";
 import type { ProjectDefinition, ProjectHighlight } from "../data/projects";
+import { getAssetPath } from "../core/utils/assetPath";
 
 interface ProjectSectionProps {
   project: ProjectDefinition;
 }
-
-const ACCENT_COLORS = ["#8b5cf6", "#22d3ee", "#f97316", "#22c55e", "#06b6d4"];
 
 export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
   const { language, direction } = useLanguage();
@@ -18,11 +18,10 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
 
   useEffect(() => {
     if (!screensCount) return;
-
-    const interval = window.setInterval(() => {
-      setActiveScreen((prev) => (prev + 1) % screensCount);
-    }, 4000);
-
+    const interval = window.setInterval(
+      () => setActiveScreen((prev) => (prev + 1) % screensCount),
+      4000
+    );
     return () => window.clearInterval(interval);
   }, [screensCount]);
 
@@ -33,11 +32,6 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
   const tagline = project.tagline[language];
   const description = project.description[language];
 
-  const accent =
-    ACCENT_COLORS[
-      (project.universe - 1 + ACCENT_COLORS.length) % ACCENT_COLORS.length
-    ];
-
   const getHighlight = (id: ProjectHighlight["id"]) =>
     project.highlights.find((h) => h.id === id);
 
@@ -46,6 +40,11 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
   const role = getHighlight("role");
 
   const currentScreen = project.screens[activeScreen];
+  const currentScreenSrc = currentScreen
+    ? getAssetPath(currentScreen.src)
+    : "";
+
+  const techLine = project.techStack.join(" • ");
 
   const handleVisit = () => {
     if (!project.liveUrl) return;
@@ -57,17 +56,22 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
     window.open(project.repoUrl, "_blank", "noopener,noreferrer");
   };
 
-  const techLine = project.techStack.join(" • ");
-
   return (
     <section
       dir={direction}
       className="relative mx-auto max-w-6xl px-6 pb-20 lg:px-0"
     >
-      {/* خط بداية السكشن */}
+      
       <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-700/70 to-transparent" />
 
-      <div className="mt-10 mb-6 flex items-center justify-between text-xs text-slate-400">
+      
+      <motion.div
+        className="mt-10 mb-6 flex items-center justify-between text-xs text-slate-400"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className={direction === "rtl" ? "text-right" : "text-left"}>
           <div className="mb-1 text-[11px] uppercase tracking-[0.25em] text-slate-500">
             {isArabic ? "العالم" : "UNIVERSE"} {worldNumber}
@@ -79,18 +83,20 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
         <div className="hidden text-[11px] uppercase tracking-[0.25em] text-slate-500 md:block">
           {techLine}
         </div>
-      </div>
+      </motion.div>
 
       <div
         className={`grid gap-10 md:grid-cols-2 ${
           direction === "rtl" ? "md:grid-flow-col-dense" : ""
         }`}
       >
-        {/* النص */}
-        <div
-          className={
-            direction === "rtl" ? "md:order-2 text-right" : "md:order-1"
-          }
+        
+        <motion.div
+          className={direction === "rtl" ? "md:order-2 text-right" : "md:order-1"}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <CinematicTitle
             text={title}
@@ -105,7 +111,14 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
             {description}
           </p>
 
-          <div className="mb-6 grid gap-4 text-xs text-slate-300 md:grid-cols-3">
+          
+          <motion.div
+            className="mb-6 grid gap-4 text-xs text-slate-300 md:grid-cols-3"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             {role && (
               <div>
                 <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -136,9 +149,16 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
                 </p>
               </div>
             )}
-          </div>
+          </motion.div>
 
-          <div className="mb-4 flex flex-wrap gap-2">
+          
+          <motion.div
+            className="mb-4 flex flex-wrap gap-2"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
             {project.techStack.map((tech) => (
               <span
                 key={tech}
@@ -147,9 +167,16 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
                 {tech}
               </span>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-3">
+          
+          <motion.div
+            className="flex flex-wrap gap-3"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             {project.liveUrl && (
               <button
                 type="button"
@@ -168,20 +195,18 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
                 {isArabic ? "عرض الكود على GitHub" : "View code on GitHub"}
               </button>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* معاينة الشاشات */}
-        <div className={direction === "rtl" ? "md:order-1" : "md:order-2"}>
+        
+        <motion.div
+          className={direction === "rtl" ? "md:order-1" : "md:order-2"}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="relative rounded-3xl bg-slate-950/90 p-[1px] shadow-[0_0_30px_rgba(15,23,42,0.9)]">
-            <div
-              className="pointer-events-none absolute -inset-px rounded-3xl opacity-70 mix-blend-screen"
-              style={{
-                background:
-                  `radial-gradient(circle at 0% 0%, ${accent}, transparent 55%),` +
-                  `radial-gradient(circle at 100% 100%, ${accent}, transparent 55%)`,
-              }}
-            />
             <div className="relative rounded-[22px] bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 p-6">
               <div className="mb-4 flex items-center justify-between text-xs text-slate-400">
                 <span>
@@ -195,7 +220,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
               <div className="relative overflow-hidden rounded-2xl bg-slate-900/80">
                 {currentScreen && (
                   <img
-                    src={currentScreen.src}
+                    src={currentScreenSrc}
                     alt={currentScreen.alt}
                     className="h-[330px] w-full object-contain"
                     loading="lazy"
@@ -227,7 +252,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ project }) => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
