@@ -14,7 +14,7 @@ export interface ProjectScreen {
 }
 
 export interface ProjectHighlight {
-  id: "keyPoints" | "focus" | "role";
+  id: "keyPoints" | "focus" | "role" | "deployment";
   label: LocalizedText;
   body: LocalizedText;
 }
@@ -27,7 +27,7 @@ export interface ProjectDefinition {
   tagline: LocalizedText;
   description: LocalizedText;
   techStack: string[];
-  repoUrl: string;
+  repoUrl?: string;
   liveUrl?: string;
   screens: ProjectScreen[];
   highlights: ProjectHighlight[];
@@ -724,7 +724,144 @@ export const projects: ProjectDefinition[] = [
       },
     ],
   },
+/**
+ * Arab Tourism Platform (Website)
+ */
+{
+  id: "arab-tourism-platform",
+  universe: 7,
+  slug: "project-7",
+  name: {
+    en: "Arab Tourism Platform",
+    ar: "Arab Tourism Platform – منصة المعالم السياحية العربية",
+  },
+  tagline: {
+    en: "Arabic-first static tourism directory with an interactive SVG map, country theming, and rich landmark pages (Next.js Export).",
+    ar: "دليل سياحي عربي أولًا بصفحات دول ومعالم + خريطة SVG تفاعلية + ثيمات لكل دولة، جاهز للتصدير كـ Static (Next.js Export).",
+  },
+  description: {
+    en: [
+      "Arab Tourism Platform is a modern Arabic-first tourism directory built with Next.js (App Router), React, and Tailwind CSS.",
+      "It provides a country → landmarks browsing flow, an interactive SVG map of the Arab world (d3-geo + topojson + world-atlas), and detailed landmark pages including long narrative text, sources, coordinates, and image-search suggestions.",
+      "The project is fully static-export ready (outputs an /out folder) and can be deployed to shared hosting like InfinityFree with no backend—data is shipped locally as JSON/CSV and generated into static pages.",
+    ].join(" "),
+    ar: [
+      "Arab Tourism Platform هي منصة دليل سياحي عربية أولًا مبنية باستخدام Next.js (App Router) وReact وTailwind CSS.",
+      "توفر تجربة تصفح دولة → معالم، وخريطة SVG تفاعلية للوطن العربي (d3-geo + topojson-client + world-atlas)، وصفحات معالم غنية تحتوي على سرد عربي طويل، مصادر، إحداثيات، واقتراحات بحث عن الصور.",
+      "المشروع مُجهّز للتصدير كـ Static بالكامل (ينتج مجلد /out) ويمكن رفعه على استضافات Shared مثل InfinityFree بدون أي Backend، حيث يتم الاعتماد على بيانات محلية JSON/CSV تُحوّل إلى صفحات ثابتة.",
+    ].join(" "),
+  },
+  techStack: [
+    "Next.js (App Router)",
+    "React",
+    "Tailwind CSS",
+    "Static Export (output: 'export')",
+    "d3-geo",
+    "topojson-client",
+    "world-atlas",
+    "Local JSON/CSV Dataset",
+  ],
+  repoUrl: "",
+  liveUrl: "https://arabesque.lovestoblog.com/",
+  screens: [
+    {
+      id: "arab-tourism-1",
+      src: "/assets/project7/1.png",
+      alt: "Home page showing the Arab world SVG map and countries directory",
+    },
+    {
+      id: "arab-tourism-2",
+      src: "/assets/project7/2.png",
+      alt: "Interactive SVG map hover/click states for countries",
+    },
+    {
+      id: "arab-tourism-3",
+      src: "/assets/project7/3.png",
+      alt: "Country page with themed header, categories, and landmark cards",
+    },
+    {
+      id: "arab-tourism-4",
+      src: "/assets/project7/4.png",
+      alt: "Landmark details page with long Arabic narrative and quick facts",
+    },
+    {
+      id: "arab-tourism-5",
+      src: "/assets/project7/5.png",
+      alt: "Landmark sources, coordinates, and image-search suggestions section",
+    },
+    {
+      id: "arab-tourism-6",
+      src: "/assets/project7/6.png",
+      alt: "Search page results for landmarks and cities",
+    },
+    {
+      id: "arab-tourism-7",
+      src: "/assets/project7/7.png",
+      alt: "Mobile responsive layout for map and directory browsing",
+    },
+    {
+      id: "arab-tourism-8",
+      src: "/assets/project7/8.png",
+      alt: "Country theming via CSS variables and background motifs",
+    },
+    {
+      id: "arab-tourism-9",
+      src: "/assets/project7/Screenshot_2025-12-28-22-08-38-245_com.android.chrome.jpg",
+      alt: "Country theming via CSS variables and background motifs",
+    },
+    {
+      id: "arab-tourism-10",
+      src: "/assets/project7/Screenshot_2025-12-28-22-07-12-883_com.android.chrome[1].jpg",
+      alt: "Country theming via CSS variables and background motifs",
+    },
+  ],
+  highlights: [
+    {
+      id: "keyPoints",
+      label: {
+        en: "Key points",
+        ar: "أبرز النقاط",
+      },
+      body: {
+        en: "Arabic-first UI, country → landmarks directory, interactive SVG map (d3-geo/topojson), per-country theming via CSS variables, and rich landmark pages (narrative + sources + coordinates). Fully static export to /out for shared hosting.",
+        ar: "واجهة عربية أولًا، دليل دول → معالم، خريطة SVG تفاعلية (d3-geo/topojson)، ثيم لكل دولة عبر CSS Variables، وصفحات معالم غنية (سرد + مصادر + إحداثيات). تصدير Static كامل إلى /out لرفع المشروع على استضافات Shared.",
+      },
+    },
+    {
+      id: "focus",
+      label: {
+        en: "Focus",
+        ar: "التركيز",
+      },
+      body: {
+        en: "Performance-friendly static architecture, clean responsive UI, scalable dataset-driven pages, and map usability on mobile (hover/focus/tap).",
+        ar: "بنية Static سريعة وخفيفة، واجهة Responsive نظيفة، صفحات قابلة للتوسع بالاعتماد على Dataset محلي، وتحسين تجربة الخريطة على الموبايل (tap/hover/focus).",
+      },
+    },
+    {
+      id: "role",
+      label: {
+        en: "My role",
+        ar: "الدور",
+      },
+      body: {
+        en: "UI/UX implementation, components system (cards, pills, sidebar blocks), static routing (country/landmark pages), SVG map integration, theming system, and data utilities for JSON/CSV.",
+        ar: "تنفيذ الواجهات وتجربة المستخدم، بناء نظام مكوّنات (Cards/Pills/Sidebar Blocks)، إعداد صفحات Static للدول والمعالم، دمج خريطة SVG التفاعلية، بناء نظام الثيمات، وتجهيز أدوات التعامل مع بيانات JSON/CSV.",
+      },
+    },
+    {
+      id: "deployment",
+      label: {
+        en: "Deployment",
+        ar: "النشر والاستضافة",
+      },
+      body: {
+        en: "Static export-ready (Next.js output: 'export') producing /out for uploading via File Manager/FTP to InfinityFree or any static host.",
+        ar: "جاهز للتصدير كـ Static (Next.js output: 'export') مع مجلد /out للرفع عبر File Manager/FTP على InfinityFree أو أي استضافة Static.",
+      },
+    },
+  ],
+},
 ];
-
 
 export type ProjectId = (typeof projects)[number]["id"];

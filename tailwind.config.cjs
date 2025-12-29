@@ -1,5 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  theme: {
+  extend: {
+    fontFamily: {
+      body: ["Cairo", "system-ui", "sans-serif"],
+      display: ["IBM Plex Sans Arabic", "system-ui", "sans-serif"],
+    },
+  },
+},
+
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {

@@ -67,27 +67,24 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onEnterFirstWorld }) => {
             direction === "rtl" ? "md:order-2 text-right" : "md:order-1"
           }`}
         >
-          {/* كابشن رفيع مع خط تركوازي أنيق */}
-          <div className="mb-4 inline-flex items-center gap-3">
-            <span className="h-px w-6 rounded-full bg-cyan-300/80" />
-            <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-cyan-100/85">
-              {kicker}
-            </span>
-          </div>
+         <span
+  className={`text-[11px] font-medium tracking-[0.28em] text-cyan-100/85 ${
+    isArabic ? "" : "uppercase"
+  } font-body`}
+>
+  {kicker}
+</span>
 
           <CinematicTitle
-            as="h1"
-            text={title}
-            className="mb-6 text-3xl leading-snug text-slate-50 sm:text-4xl md:text-5xl"
-          />
+  as="h1"
+  text={title}
+  className="mb-6 font-display tracking-tight text-3xl leading-snug text-slate-50 sm:text-4xl md:text-5xl"
+/>
 
-          <p className="mb-3 text-base text-slate-100/95">{aboutLead}</p>
-          <p className="mb-3 text-sm text-slate-300 md:text-base">
-            {aboutBody1}
-          </p>
-          <p className="mb-8 text-sm text-slate-400 md:text-base">
-            {aboutBody2}
-          </p>
+<p className="mb-3 font-body text-base text-slate-100/95">{aboutLead}</p>
+<p className="mb-3 font-body text-sm text-slate-300 md:text-base">{aboutBody1}</p>
+<p className="mb-8 font-body text-sm text-slate-400 md:text-base">{aboutBody2}</p>
+
 
           <div
             className={`flex flex-wrap items-center gap-4 ${
